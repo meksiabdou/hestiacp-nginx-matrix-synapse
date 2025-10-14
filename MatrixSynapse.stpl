@@ -1,6 +1,5 @@
 server {
     listen %ip%:%proxy_ssl_port% ssl;
-    listen %ip%:8448 ssl;
     server_name %domain_idn% %alias_idn%;
     ssl_certificate      %ssl_pem%;
     ssl_certificate_key  %ssl_key%;
