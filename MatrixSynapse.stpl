@@ -1,5 +1,5 @@
 server {
-    listen 8448 ssl;
+    listen %ip%:8448 ssl;
     listen %ip%:%proxy_ssl_port% ssl;
     server_name %domain_idn% %alias_idn%;
     ssl_certificate      %ssl_pem%;
@@ -24,17 +24,6 @@ server {
 
     location /error/ {
         alias   %home%/%user%/web/%domain%/document_errors/;
-    }
-
-    # Matrix .well-known endpoints
-    location /.well-known/matrix/server {
-        add_header Content-Type application/json;
-        return 200 '{"m.server": "%domain%:8448"}';
-    }
-
-    location /.well-known/matrix/client {
-        add_header Content-Type application/json;
-        return 200 '{"m.homeserver": {"base_url": "https://%domain%"}}';
     }
 
     location @fallback {
