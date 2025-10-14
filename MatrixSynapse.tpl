@@ -23,6 +23,12 @@ server {
         alias  %home%/%user%/web/%domain%/document_errors/;
     }
 
+    location @fallback {
+        proxy_ssl_server_name on;
+        proxy_ssl_name $host;
+        proxy_pass http://localhost:8008;
+    }
+
     location ~ /\.ht    {return 404;}
     location ~ /\.svn/  {return 404;}
     location ~ /\.git/  {return 404;}
